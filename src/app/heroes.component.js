@@ -13,22 +13,15 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var hero_service_1 = require("./hero.service");
 var HeroesComponent = (function () {
-    function HeroesComponent(router, heroService) {
-        this.router = router;
+    function HeroesComponent(heroService, router) {
         this.heroService = heroService;
+        this.router = router;
     }
     HeroesComponent.prototype.getHeroes = function () {
         var _this = this;
-        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
-    };
-    HeroesComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
-    };
-    HeroesComponent.prototype.onSelect = function (hero) {
-        this.selectedHero = hero;
-    };
-    HeroesComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedHero.id]);
+        this.heroService
+            .getHeroes()
+            .then(function (heroes) { return _this.heroes = heroes; });
     };
     HeroesComponent.prototype.add = function (name) {
         var _this = this;
@@ -53,6 +46,15 @@ var HeroesComponent = (function () {
             }
         });
     };
+    HeroesComponent.prototype.ngOnInit = function () {
+        this.getHeroes();
+    };
+    HeroesComponent.prototype.onSelect = function (hero) {
+        this.selectedHero = hero;
+    };
+    HeroesComponent.prototype.gotoDetail = function () {
+        this.router.navigate(['/detail', this.selectedHero.id]);
+    };
     return HeroesComponent;
 }());
 HeroesComponent = __decorate([
@@ -60,10 +62,9 @@ HeroesComponent = __decorate([
         selector: 'my-heroes',
         templateUrl: "./heroes.component.html",
         styleUrls: ["./heroes.component.css"]
-        //providers: [HeroService]
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        hero_service_1.HeroService])
+    __metadata("design:paramtypes", [hero_service_1.HeroService,
+        router_1.Router])
 ], HeroesComponent);
 exports.HeroesComponent = HeroesComponent;
 //# sourceMappingURL=heroes.component.js.map
